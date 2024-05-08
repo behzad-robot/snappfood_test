@@ -1,0 +1,3 @@
+docker run --name snappfood_postgresql --network snappfood -e POSTGRES_USER=snappfood -e POSTGRES_PASSWORD=snappfood -e POSTGRES_DB=snappfood -p 3300:5432 -v /root/card_battle/postgres-data:/var/lib/postgresql/data -d postgres
+#local:
+docker run --name snappfood_postgresql --network snappfood -e POSTGRES_USER=snappfood -e POSTGRES_PASSWORD=snappfood -e POSTGRES_DB=snappfood -p 3300:5432 -d postgres

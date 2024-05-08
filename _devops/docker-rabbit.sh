@@ -1,0 +1,1 @@
+docker run -it -d --rm --name snappfood_rabbitmq --network snappfood -p 5100:5672 -p 55672:15672 rabbitmq:3.12-management

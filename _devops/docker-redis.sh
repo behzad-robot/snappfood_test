@@ -1,0 +1,1 @@
+docker run -d -p 5200:6379 --name snappfood_redis --network snappfood redis
