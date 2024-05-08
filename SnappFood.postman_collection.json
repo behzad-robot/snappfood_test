@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "36e0d440-24ec-4bdf-ab9a-2e72b6d711e1",
+		"name": "SnappFood",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "4269742",
+		"_collection_link": "https://deadcatz.postman.co/workspace/Dead-Cat~4b708f53-4807-4239-88f2-f0ed06ad7526/collection/4269742-36e0d440-24ec-4bdf-ab9a-2e72b6d711e1?action=share&source=collection_link&creator=4269742"
+	},
+	"item": [
+		{
+			"name": "Order-Vendor-Trip-Agent",
+			"item": [
+				{
+					"name": "Home",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{ordering}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Vendor By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{ordering}}/api/vendors/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Vendor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{ordering}}/api/vendors/"
+					},
+					"response": []
+				},
+				{
+					"name": "Order By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{ordering}}/api/orders/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\":1,\r\n    \"vendorID\":1,\r\n    \"deliveryTime\":5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{ordering}}/api/orders/"
+					},
+					"response": []
+				},
+				{
+					"name": "Trip By Order ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{ordering}}/api/trips/by-order-id/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Trip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderID\":1,\r\n    \"bikeID\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{ordering}}/api/trips/"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Trip Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderID\":1,\r\n    \"status\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{ordering}}/api/trips/change-status"
+					},
+					"response": []
+				},
+				{
+					"name": "Agent By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{ordering}}/api/agents/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Agent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"support_1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{ordering}}/api/agents/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Support",
+			"item": [
+				{
+					"name": "Report Order Delay",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderID\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{ordering}}/api/support/report-order-delay"
+					},
+					"response": []
+				},
+				{
+					"name": "Order Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{ordering}}/api/support/order-status/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task For Agent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{ordering}}/api/support/get-task-for-agent/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task For Agent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agentID\":1,\r\n    \"taskID\":7,\r\n    \"markAsDone\":true,\r\n    \"agentMessage\":\"hi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{ordering}}/api/support/update-task-for-agent"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Analytics",
+			"item": [
+				{
+					"name": "Get Weekly Delays Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{ordering}}/api/analytics/vendor-delays-weekly-report"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ordering",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
