@@ -6,4 +6,4 @@ RUN go mod download
 COPY . .
 RUN go build -o snappfood cmd/web/main.go
 EXPOSE 5400
-CMD ["./snappfood","--docker"]
+CMD ["./snappfood"]
