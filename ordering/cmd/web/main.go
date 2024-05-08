@@ -48,15 +48,14 @@ func main() {
 	tripsRepo := repositories.NewTripRepository(db)
 	agentsRepo := repositories.NewAgentRepository(db)
 	delayReportsRepo := repositories.NewDelayReportRepository(db)
-	delayResultsRepo := repositories.NewDelayResultRepository(db)
 
 	rabbitHelperService := rabbit.NewRabbitHelperService(rabbitMQConnection)
 	defer rabbitHelperService.Close()
 
-	analyticsService := analytics.NewAnalyticsService(delayResultsRepo)
 	vendorsService := vendors.NewVendorService(vendorsRepo)
 	orderService := orders.NewOrderService(ordersRepo)
-	tripService := trips.NewTripService(tripsRepo, analyticsService, orderService)
+	analyticsService := analytics.NewAnalyticsService(ordersRepo)
+	tripService := trips.NewTripService(tripsRepo, orderService)
 
 	agentsService := agents.NewAgentService(agentsRepo)
 	supportService := support.NewSupportService(delayReportsRepo, agentsService, orderService, tripService, rabbitHelperService)

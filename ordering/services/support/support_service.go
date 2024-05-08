@@ -65,6 +65,14 @@ func (service *supportService) ReportOrderDelay(command ReportOrderDelayCommand)
 	if serviceErr != nil {
 		return nil, serviceErr
 	}
+	//check if order has pending agent attention needing request:
+	oldDelayReport, err := service.delayReportsRepo.FindOne("order_id = ? AND agent_id >= 0 AND is_replied_by_agent = false", order.ID)
+	if err != nil && err != repo.ErrRecordNotFound {
+		return nil, common.NewServiceError(500, err)
+	}
+	if err == nil {
+		return oldDelayReport, nil
+	}
 	trip, serviceErr := service.tripService.GetOneByOrderID(order.ID)
 	fmt.Println(trip)
 	fmt.Println(serviceErr)
@@ -97,7 +105,7 @@ func (service *supportService) ReportOrderDelay(command ReportOrderDelayCommand)
 		TripStatusAtReport: statusAtReport,
 		AgentID:            0,
 	}
-	err := service.delayReportsRepo.Insert(delayReport)
+	err = service.delayReportsRepo.Insert(delayReport)
 	if err != nil {
 		return nil, common.NewServiceError(500, err)
 	}

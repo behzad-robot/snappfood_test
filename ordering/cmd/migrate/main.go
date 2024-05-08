@@ -25,7 +25,6 @@ func main() {
 
 	agentsRepo := repositories.NewAgentRepository(db)
 	delayReportsRepo := repositories.NewDelayReportRepository(db)
-	delayResultsRepo := repositories.NewDelayResultRepository(db)
 
 	if err := vendorsRepo.Migrate(); err != nil {
 		panic(err)
@@ -41,9 +40,6 @@ func main() {
 		panic(err)
 	}
 	if err := delayReportsRepo.Migrate(); err != nil {
-		panic(err)
-	}
-	if err := delayResultsRepo.Migrate(); err != nil {
 		panic(err)
 	}
 

@@ -27,7 +27,6 @@ func main() {
 
 	agentsRepo := repositories.NewAgentRepository(db)
 	// delayReportsRepo := repositories.NewDelayReportRepository(db)
-	// delayResultsRepo := repositories.NewDelayResultRepository(db)
 
 	vendorsRepo.Insert(&models.Vendor{Name: "vendor test"})
 	vendorsRepo.Insert(&models.Vendor{Name: "vendor test 2"})

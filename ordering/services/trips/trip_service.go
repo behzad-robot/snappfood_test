@@ -5,7 +5,6 @@ import (
 	"snappfood/ordering/common/repo"
 	"snappfood/ordering/internal/models"
 	"snappfood/ordering/internal/repositories"
-	"snappfood/ordering/services/analytics"
 	"snappfood/ordering/services/orders"
 	"time"
 )
@@ -16,18 +15,16 @@ type TripService interface {
 	ChangeStatus(command ChangeTripStatusCommand) *common.ServiceError
 }
 
-func NewTripService(tripsRepo repositories.TripRepository, delayResultsService analytics.AnalyticsService, orderService orders.OrderService) TripService {
+func NewTripService(tripsRepo repositories.TripRepository, orderService orders.OrderService) TripService {
 	return &tripService{
-		tripsRepo:           tripsRepo,
-		delayResultsService: delayResultsService,
-		orderService:        orderService,
+		tripsRepo:    tripsRepo,
+		orderService: orderService,
 	}
 }
 
 type tripService struct {
-	tripsRepo           repositories.TripRepository
-	delayResultsService analytics.AnalyticsService
-	orderService        orders.OrderService
+	tripsRepo    repositories.TripRepository
+	orderService orders.OrderService
 }
 
 func (service *tripService) GetOneByOrderID(orderID uint) (*models.Trip, *common.ServiceError) {
@@ -72,20 +69,6 @@ func (service *tripService) ChangeStatus(command ChangeTripStatusCommand) *commo
 	err := service.tripsRepo.Edit(trip)
 	if err != nil {
 		return common.NewServiceError(500, err)
-	}
-	//check if we need delay result:
-	if command.Status == models.TRIP_STATUS_DELIVERED {
-		order, serviceErr := service.orderService.GetOne(trip.OrderID)
-		if serviceErr == nil {
-			//order had delay:
-			if order.HasDelay() {
-				service.delayResultsService.CreateDelayResult(analytics.CreateDelayResultCommand{
-					OrderID:   order.ID,
-					VendorID:  order.VendorID,
-					DelayTime: int64(order.GetDelay()),
-				})
-			}
-		}
 	}
 	return nil
 }
