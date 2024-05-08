@@ -2,7 +2,16 @@
 ## Running The Project
 The simplest way to run this project is using docker compose(use docker-compose if you're on older version.)
     
+**Step 1:**
+
     docker compose up
+**Step 2:**
+Goto console exec of docker container (snappfood_service) and run migration and test_data (optional)
+
+    cd app
+    go run ./cmd/migrate/main.go
+    go run ./cmd/test_data/main.go
+
 
 ## Testing Routes:
 Import postman.json to postman.
