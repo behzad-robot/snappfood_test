@@ -5,5 +5,5 @@ COPY go.sum .
 RUN go mod download
 COPY . .
 RUN go build -o snappfood cmd/web/main.go
-EXPOSE 5400
+EXPOSE 3000
 CMD ["./snappfood"]
