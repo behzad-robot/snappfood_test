@@ -7,7 +7,7 @@ The simplest way to run this project is using docker compose(use docker-compose 
 ## Testing Routes:
 Import postman.json to postman.
 
-For info on what each route does Read ROUTES.md file.
+For info on what each route does Read [ROUTES.md](./ROUTES.md) file.
 
 ## Running Tests
 There are 2 sample tests in this project.
@@ -21,7 +21,7 @@ There are 2 sample tests in this project.
 ## Running locally with .env file:
 - Make sure you have postgresql running somewhere.
 - Make sure you have rabbitmq running somewhere.
-- Copy sample.env as .env in same directory and update values.
+- Copy `sample.env` as `.env` in same directory and update values.
 
 Run this command to get tables created:
 
